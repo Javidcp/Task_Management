@@ -22,20 +22,15 @@ const Dashboard = () => {
     if (!user) return;
   }, [user])
 
-  useEffect(() => {
-    const fetchTasks = async () => {
+
+    const fetchCounts = async () => {
       try{
         const res = await api.get(`/api/task/count`)
-      setCount(res.data)
+        setCount(res.data)
       } catch (err) {
         console.error(err);
-        
       }
     }
-    fetchTasks()
-  }, [])
-
-
 
   return (
     <div className={`font-poppins min-h-screen flex flex-col md:flex-row ${theme === 'light' ? 'text-black bg-white' : 'text-white bg-[#181818]'}`}>
@@ -61,21 +56,21 @@ const Dashboard = () => {
             <h2 className="text-[10px] font-bold">Lists</h2>
             <div className={`flex justify-between items-center px-5 py-2 rounded text-xs  ${theme === 'light' ? 'text-black bg-white' : 'text-white bg-[#282828] '}`}>
               <ul className="w-full text-sm flex flex-col gap-2">
-        {Object.keys(counts.tagsCount).map(tag => (
-          <li key={tag} className="flex justify-between">
-            <p>{tag}</p> 
-            <p>
-              {counts.tagsCount[tag]}
-            </p>
-          </li>
-        ))}
+                {Object.keys(counts.tagsCount).map(tag => (
+                  <li key={tag} className="flex justify-between">
+                    <p>{tag}</p> 
+                    <p>
+                      {counts.tagsCount[tag]}
+                    </p>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
       </section>
 
       <section className="w-full">
-        <TaskManagement/>
+        <TaskManagement onTaskAdded={fetchCounts} />
       </section>
     </div>
   )
