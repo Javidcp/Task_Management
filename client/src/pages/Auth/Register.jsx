@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { registering } from "../../api/authApi";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 
 
@@ -25,6 +26,7 @@ const Register = () => {
             setApiError("");
             await registering(data);
             navigate("/login");
+            toast.success("Register successfull")
         } catch (err) {
             setApiError(err.response?.data?.message || "Login failed");
         }
