@@ -66,7 +66,7 @@ const Login = () => {
                         <input 
                             {...register("email", { required: true })}
                             placeholder="Enter your email"
-                            className="py-1 border-b  border-[#ddd] min-w-60"
+                            className="py-1 border-b focus:outline-0 border-[#ddd] min-w-60"
                         />
                         { errors.email && <span className="text-xs text-red-500">Email is required</span> }
                     </label>
@@ -74,7 +74,7 @@ const Login = () => {
                         <input 
                             {...register("password", { required: true })}
                             placeholder="Enter your password"
-                            className="py-1 border-b  border-[#ddd] min-w-60"
+                            className="py-1 border-b focus:outline-0 border-[#ddd] min-w-60"
                         />
                         { errors.password && <span className="text-xs text-red-500">Password is required</span> }
                     </label>
