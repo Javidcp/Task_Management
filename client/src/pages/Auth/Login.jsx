@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { login } from "../../api/authApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { toast } from "react-toastify";
 
 
 const Login = () => {
@@ -26,6 +26,7 @@ const Login = () => {
             setApiError("");
             await login(data);
             navigate("/dashboard");
+            toast.success("Login successfull")
         } catch (err) {
             setApiError(err.response?.data?.message || "Login failed");
         }
@@ -90,9 +91,6 @@ const Login = () => {
                     </Link>
                 </div>
             </div>
-
-
-
         </div>
         </>
     );
