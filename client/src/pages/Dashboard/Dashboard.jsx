@@ -48,7 +48,7 @@ const Dashboard = () => {
           <div className="mx-4 flex flex-col gap-1 mt-1">
             <h2 className="text-[10px] font-bold">Tasks</h2>
             <div className={`flex justify-between items-center px-5 py-2 rounded text-xs  ${theme === 'light' ? 'bg-[#f5f5f5]' : 'text-white bg-[#282828]  '}`}>
-              <p>{currentDate}</p>
+              <p>{currentDate.slice(0,10)}</p>
               <p>{totalToday}</p>
             </div>
           </div>
