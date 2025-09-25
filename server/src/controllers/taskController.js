@@ -85,17 +85,17 @@ export const taskCount = asyncHandler( async(req, res, next) => {
     
     const today = new Date();
 
-      const tasks = await Task.find({ userId: userObjectId });
-      const tasksForToday = tasks.filter(task => shouldShowTask(task, today));
-      const totalToday = tasksForToday.length;
+    const tasks = await Task.find({ userId: userObjectId });
+    const tasksForToday = tasks.filter(task => shouldShowTask(task, today));
+    const totalToday = tasksForToday.length;
 
-  const tagsCountAgg = await Task.aggregate([
-    { $match: { userId: userObjectId } },
-    { $group: { _id: '$tags', count: { $sum: 1 } } }
-  ]);
+    const tagsCountAgg = await Task.aggregate([
+        { $match: { userId: userObjectId } },
+        { $group: { _id: '$tags', count: { $sum: 1 } } }
+    ]);
 
     const tagsCount = {};
-    tagsCountAgg.forEach(item => {
+    tagsCountAgg.sort((a, b) => a._id.toLowerCase().localeCompare(b._id.toLowerCase())).forEach(item => {
         if (item._id) tagsCount[item._id] = item.count;
     });
 
