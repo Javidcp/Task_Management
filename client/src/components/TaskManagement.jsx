@@ -8,6 +8,7 @@ import api from "../api/instance";
 import useCalendarStore from "../store/calendarStore";
 import { format, isToday } from "date-fns";
 import useTaskStore from "../store/taskStore";
+import { toast } from "react-toastify";
 
 const colors = [
   "#A7F3D0", "#C084FC", "#FEB6A0", "#7DD3FC", "#FEF08A",
@@ -184,9 +185,10 @@ console.log(tagsCount);
       .then(() => {
         reset();
         setIsOpen(false);
+        toast.success("Task added successfully")
         fetchTasks();
       })
-      .catch(err => console.error(err));
+      .catch(err => {console.error(err); toast.error(err.response?.data?.message)});
   };
 
   const selectedColor = watch("color");
