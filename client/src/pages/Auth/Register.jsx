@@ -65,7 +65,7 @@ const Register = () => {
                         <input 
                             {...register("name", { required: true })}
                             placeholder="Enter your name"
-                            className="py-1 border-b  border-[#ddd] min-w-60"
+                            className="py-1 border-b focus:outline-0 border-[#ddd] min-w-60"
                         />
                     </label>
                     { errors.name && <span className="text-xs text-red-500">Name is required</span> }
@@ -73,7 +73,7 @@ const Register = () => {
                         <input 
                             {...register("email", { required: true })}
                             placeholder="Enter your email"
-                            className="py-1 border-b  border-[#ddd] min-w-60"
+                            className="py-1 border-b focus:outline-0 border-[#ddd] min-w-60"
                         />
                         { errors.email && <span className="text-xs text-red-500">Email is required</span> }
                     </label>
