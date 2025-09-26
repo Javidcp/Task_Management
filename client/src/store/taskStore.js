@@ -6,14 +6,12 @@ const useTaskStore = create(
     persist(
         (set) => ({
             totalToday: 0,
-            tagCounts: {},
             setTotalToday: (count) => set({ totalToday: count }),
-            setTagCount: (tags) => set({ taskCounts: tags })
         }),
         {
-    name: "task-stats-storage",
-    getStorage: () => localStorage,
-  }
+            name: "task-stats-storage",
+            getStorage: () => localStorage,
+        }
     )
 )
 

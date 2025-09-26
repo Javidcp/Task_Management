@@ -16,9 +16,9 @@ const colors = [
   "#F472B6", "#F87171", "#9CA3AF"
 ];
 
-const TaskManagement = () => {
+const TaskManagement = ({ onTaskAdded }) => {
   const { theme } = useThemeStore();
-  const { setTotalToday, setTagCount } = useTaskStore();
+  const { setTotalToday } = useTaskStore();
   const [isOpen, setIsOpen] = useState(false);
   const [tags, setTags] = useState([]);
   const [showTagInput, setShowTagInput] = useState(false);
@@ -63,6 +63,7 @@ const fetchTasks = useCallback(async () => {
 
     const res = await api.get(`/api/task/all?date=${currentDate}`);
     const tasksFromDB = res.data;
+    if (onTaskAdded) onTaskAdded();
 
     const filteredTasks = tasksFromDB.filter(task => {
       if (!task.repeatInterval) {
@@ -85,17 +86,10 @@ const fetchTasks = useCallback(async () => {
       console.log(filteredTasks.length);
       
 
-const tagsCount = {};
-tasksFromDB.forEach(task => {
-  if (task.tags) tagsCount[task.tags] = (tagsCount[task.tags] || 0) + 1;
-});
-setTagCount(tagsCount);
-console.log(tagsCount);
-
   } catch (err) {
     console.error(err);
   }
-}, [currentDateISO, setTagCount, setTotalToday]);
+}, [currentDateISO, setTotalToday]);
 
 
   useEffect(() => { 
@@ -116,6 +110,7 @@ console.log(tagsCount);
         { date: dateStr },
         { headers: { "Content-Type": "application/json" } }
       );
+      toast.success("task deleted", {className: "text-base px-4 py-3 rounded-lg md:text-sm md:px-3 md:py-2 sm:text-xs sm:px-2 sm:py-1"})
       setTasks(prev => prev.map(task => task._id === updatedTask._id ? updatedTask : task));
     } catch (err) {
       console.error("Error toggling read:", err);
@@ -185,7 +180,7 @@ console.log(tagsCount);
       .then(() => {
         reset();
         setIsOpen(false);
-        toast.success("Task added successfully")
+        toast.success("Task added successfull", {className: "text-base px-4 py-3 rounded-lg md:text-sm md:px-3 md:py-2 sm:text-xs sm:px-2 sm:py-1"})
         fetchTasks();
       })
       .catch(err => {console.error(err); toast.error(err.response?.data?.message)});

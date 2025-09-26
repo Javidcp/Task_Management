@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { registering } from "../../api/authApi";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 
 
@@ -25,6 +26,7 @@ const Register = () => {
             setApiError("");
             await registering(data);
             navigate("/login");
+            toast.success("Register successfull", {className: "text-base px-4 py-3 rounded-lg md:text-sm md:px-3 md:py-2 sm:text-xs sm:px-2 sm:py-1"})
         } catch (err) {
             setApiError(err.response?.data?.message || "Login failed");
         }
@@ -65,7 +67,7 @@ const Register = () => {
                         <input 
                             {...register("name", { required: true })}
                             placeholder="Enter your name"
-                            className="py-1 border-b  border-[#ddd] min-w-60"
+                            className="py-1 border-b focus:outline-0 border-[#ddd] min-w-60"
                         />
                     </label>
                     { errors.name && <span className="text-xs text-red-500">Name is required</span> }
@@ -73,7 +75,7 @@ const Register = () => {
                         <input 
                             {...register("email", { required: true })}
                             placeholder="Enter your email"
-                            className="py-1 border-b  border-[#ddd] min-w-60"
+                            className="py-1 border-b focus:outline-0 border-[#ddd] min-w-60"
                         />
                         { errors.email && <span className="text-xs text-red-500">Email is required</span> }
                     </label>
