@@ -8,6 +8,7 @@ import useTaskStore from "../../store/taskStore";
 import useCalendarStore from "../../store/calendarStore";
 import api from "../../api/instance";
 import { useState } from "react";
+import { format } from "date-fns";
 
 
 const Dashboard = () => {
@@ -48,7 +49,7 @@ const Dashboard = () => {
           <div className="mx-4 flex flex-col gap-1 mt-1">
             <h2 className="text-[10px] font-bold">Tasks</h2>
             <div className={`flex justify-between items-center px-5 py-2 rounded text-xs  ${theme === 'light' ? 'bg-[#f5f5f5]' : 'text-white bg-[#282828]  '}`}>
-              <p>{currentDate.slice(0,10)}</p>
+              <p>{format(currentDate, "MMMM dd, yyyy")}</p>
               <p>{totalToday}</p>
             </div>
           </div>
