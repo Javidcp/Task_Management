@@ -40,8 +40,8 @@ export const Login = asyncHandler(async (req, res, next) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "None",
         maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -51,8 +51,8 @@ export const Login = asyncHandler(async (req, res, next) => {
         name: user.name
     }), {
         httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "None",
         maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -63,13 +63,13 @@ export const Login = asyncHandler(async (req, res, next) => {
 export const logout = asyncHandler( async (req, res ,next) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "None",
     });
     res.clearCookie("user", {
         httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "None",
     });
     res.status(200).json({ message: "Logout successful" });
 })
